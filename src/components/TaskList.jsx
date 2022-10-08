@@ -54,24 +54,33 @@ export default function TaskList({hoy}) {
     setTasks(des)
   }
 
+  const rename = (id, title) => {
+    const nuevoNombre = tasks.map(task=>{
+      if(id=== task.id) task.title = title
+      
+      return task
+    })
+    setTasks(nuevoNombre)
+  }
+
 
   return (
-    <div className=''>
-      <ul>
+    <div className='flex flex-col justify-between'>
+      <ul className="md:max-h-32 max-h-60 list py-1 overflow-auto">
       {
-        tasks.map(({id, title, completed, day, month, year})=>{
-
+        tasks.map((item)=>{
+          const {id, title, completed, day, month, year} = item
           if (day === hoy[1] && month === hoy[3] && year === hoy[4]) {
             
             return(
-              <Task 
-              key={id}
-              id={id}
-              title={title}
-              completed={completed}
-              checked={checked}
-              />
-
+                <Task 
+                key={id}
+                id={id}
+                title={title}
+                completed={completed}
+                checked={checked}
+                rename={rename}
+                />
             ) 
           }
         })

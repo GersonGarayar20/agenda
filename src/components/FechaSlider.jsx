@@ -3,10 +3,13 @@ import { useState } from "react"
 
 function Card({dia, active, click}) {
 
-  
+  const handleClick = () => {
+    if (!active) click()
+  }
+
   return(
     <div 
-    onClick={()=>click()}
+    onClick={handleClick}
     className={`${active&&"bg-neutral-800"} cursor-pointer text-neutral-300 hover:bg-neutral-800 flex flex-col items-center p-2 rounded-xl w-16 h-16 `}>
       <p className="text-xs text-neutral-400">{dia[0]}</p>
       <p className={`text-xl font-semibold ${active&&"text-white"}`}>{dia[1]}</p>
